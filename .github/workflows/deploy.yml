@@ -28,6 +28,9 @@ jobs:
           role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
           aws-region: ${{ vars.AWS_REGION }}
 
+      - name: Test AWS credentials
+        run: aws sts get-caller-identity
+
       - name: Upload site to S3
         run: |
           aws s3 sync . "s3://${{ vars.S3_BUCKET }}" \
